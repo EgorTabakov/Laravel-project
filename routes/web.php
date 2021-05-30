@@ -26,16 +26,20 @@ Route::get('/hello/{name}', function (string $name) {
 });
 
 Route::get('/about', [InfoPagesController::class, 'about']);
+Route::get('/feedback', [InfoPagesController::class, 'feedback']);
+Route::post('/feedback', [InfoPagesController::class, 'store']);
+Route::get('/order', [InfoPagesController::class, 'order']);
+Route::post('/order', [InfoPagesController::class, 'orderStore']);
 
 //admin
 Route::group(['prefix'=> 'admin'], function(){
     Route::resource('/categories', AdminCategoryController::class);
     Route::resource('/news', AdminNewsController::class);
+
 });
 
 //news
-Route::get('/news', [NewsController::class, 'index'])
-    ->name('news.index');
+Route::get('/news', [NewsController::class, 'index']);
 
 Route::get('/news/{id}', [NewsController::class, 'show'])
     ->name('news.show')
