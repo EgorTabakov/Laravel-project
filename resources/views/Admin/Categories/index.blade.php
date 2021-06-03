@@ -14,7 +14,31 @@
                 This week
             </button>
         </div>
-    </div>
 
+
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Заголовок</th>
+                <th>Описание</th>
+            </tr>
+
+            @forelse($categories as $category)
+                <tr>
+                    <td>{{$category->id}}</td>
+                    <td>{{$category->title}}</td>
+                    <td>{{$category->description}}</td>
+                    <td><a href="">Ред.</a>&nbsp;||&nbsp;<a href="">Уд.</a></td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="4"><h3>Записей нет</h3></td>
+                </tr>
+            @endforelse
+
+        </table>
+    </div>
 
 @endsection

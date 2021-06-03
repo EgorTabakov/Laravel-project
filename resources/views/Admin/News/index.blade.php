@@ -14,6 +14,31 @@
             </button>
         </div>
     </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Категория</th>
+                <th>Заголовок</th>
+                <th>Описание</th>
+                <th>Действие</th>
+            </tr>
 
+            @forelse($newsList as $news)
+                <tr>
+                    <td>{{$news->id}}</td>
+                    <td>{{$news->category_id}}</td>
+                    <td>{{$news->title}}</td>
+                    <td>{{$news->description}}</td>
+                    <td><a href="">Ред.</a>&nbsp;||&nbsp;<a href="">Уд.</a></td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="4"><h3>Записей нет</h3></td>
+                </tr>
+            @endforelse
+
+        </table>
+    </div>
 
 @endsection

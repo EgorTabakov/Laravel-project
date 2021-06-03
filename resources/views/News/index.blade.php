@@ -14,24 +14,24 @@
         <div class="container">
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                @forelse ($newsList as $key => $news)
+                @forelse ($newsList  as $news)
                     <div class="col">
                         <div class="card shadow-sm">
                             <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
                                  xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
                                  preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <title>Новость - {{ $key }}</title>
+                                <title>{{ $news->title }}</title>
                                 <rect width="100%" height="100%" fill="#55595c"/>
-                                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Картинка</text>
+                                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Новость - {{ $news->id }}</text>
                             </svg>
 
                             <div class="card-body">
-                                <p class="card-text">{{ $news }}</p>
+                                <p class="card-text">{{ $news->description }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <a href="{{ route('news.show', ['id' => $key]) }}" type="button" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                                        <a href="{{ route('news.show', ['id' => $news->id]) }}" type="button" class="btn btn-sm btn-outline-secondary">Подробнее</a>
                                     </div>
-                                    <small class="text-muted">добавлена: {{ now()->format('d-m-Y H-i') }}</small>
+                                    <small class="text-muted">добавлена: {{ $news->created_at}}</small>
                                 </div>
                             </div>
                         </div>
