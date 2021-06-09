@@ -10,20 +10,13 @@ class Category extends Model
     use HasFactory;
 
     protected $table = 'categories';
+    protected $primaryKey = 'id';
 
-    public function categoryList()
-    {
-        return \DB::table($this->table)
-            ->select(['id', 'title', 'description'])
-            ->get()->toArray();
-    }
+    protected $fillable =[
+        'title',
+        'description',
+        'active'
+    ];
 
-    public function category(int $id)
-    {
-        return \DB::table($this->table)
-            ->select(['id', 'title', 'description'])
-            ->where(['id' => $id])
-            ->first();
-    }
 }
 

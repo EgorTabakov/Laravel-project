@@ -6,8 +6,7 @@
         <h1 class="h2">Список категорий</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                <a href="{{route('categories.create')}}" class="btn btn-sm btn-outline-secondary">Добавить категорию</a>
             </div>
             <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
                 <span data-feather="calendar"></span>
@@ -23,6 +22,7 @@
                 <th>ID</th>
                 <th>Заголовок</th>
                 <th>Описание</th>
+                <th colspan="2">Действие</th>
             </tr>
 
             @forelse($categories as $category)
@@ -30,7 +30,13 @@
                     <td>{{$category->id}}</td>
                     <td>{{$category->title}}</td>
                     <td>{{$category->description}}</td>
-                    <td><a href="">Ред.</a>&nbsp;||&nbsp;<a href="">Уд.</a></td>
+                    <td><a href="{{ route('categories.edit', ['category' => $category]) }}">Ред.</a></td>
+                    <td><form action="{{ route('categories.destroy', ['category' => $category]) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit"  class="btn btn-sm btn-danger">Уд</button>
+
+                        </form></td>
                 </tr>
             @empty
                 <tr>

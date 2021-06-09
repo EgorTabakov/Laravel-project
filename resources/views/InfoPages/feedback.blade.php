@@ -20,16 +20,16 @@
                     @endforeach
                 @endif
 
-                <form method="post">
+                <form method="post" >
                     @csrf
                     <div class="form-group">
-                        <label for="title">Имя *</label>
-                        <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}">
+                        <label for="name">Имя *</label>
+                        <input type="name" class="form-control" name="name" id="title" value="{{ old('name') }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="comment">Комментарий</label>
-                        <textarea class="form-control" name="comment" id="comment">{!! old('comment') !!}</textarea>
+                        <label for="order">Комментарий</label>
+                        <textarea class="form-control" name="order" id="order">{!! old('order') !!}</textarea>
                     </div>
                     <br>
                     <button class="btn btn-success" type="submit">Оставить отзыв</button>

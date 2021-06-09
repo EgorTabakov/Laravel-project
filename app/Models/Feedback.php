@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class News extends Model
+class Feedback extends Model
 {
     use HasFactory;
 
-    protected $table = 'news';
+    protected $table = 'feedback';
+    protected $primaryKey = 'id';
 
     protected $fillable =[
-        'category_id',
-        'title',
-        'image',
-        'description',
-        'slug'
+        'name',
+        'order'
     ];
+
 }
+

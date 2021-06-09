@@ -2,29 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feedback;
+use App\Models\Order;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+
 
 class InfoPagesController extends Controller
 {
     public function about()
     {
+
         return view('InfoPages.about');
     }
 
+    /**
+     * @return Application|Factory|View
+     */
     public function feedback()
     {
-        return view('InfoPages.feedback');
+        $feedback = Feedback::all();
+        return view('InfoPages.feedback', [
+            'feedback' => $feedback
+        ]);
+
     }
 
-    public function store(Request $request)
+
+    public function store(Request $request, Feedback $feedback)
     {
         $request->validate([
-            'title' => ['required']
+            'name' => ['required']
         ]);
-        $fields = $request->only('title', 'comment');
-        $data = json_encode($fields, JSON_UNESCAPED_UNICODE);
-        file_put_contents('feedback.txt', $data);
-        return view('InfoPages.feedback');
+        $fields = $request->only('name', 'order');
+
+        $feedback = $feedback->fill($fields)->save();
+        if ($feedback) {
+            return view('InfoPages.feedback');
+        }
+        return back();
+
     }
 
     public function order()
@@ -32,15 +51,19 @@ class InfoPagesController extends Controller
         return view('InfoPages.order');
     }
 
-    public function orderStore(Request $request)
+    public function orderStore(Request $request, Order $order)
     {
         $request->validate([
-            'title' => ['required']
+            'name' => ['required']
         ]);
-        $fields = $request->only('title', 'phone', 'mail', 'description');
-        $data = json_encode($fields, JSON_UNESCAPED_UNICODE);
-        file_put_contents('order.txt', $data);
-        return view('InfoPages.order');
+        $fields = $request->only('name', 'phone', 'email', 'order');
+
+        $order = $order->fill($fields)->save();
+        if ($order) {
+            return view('InfoPages.order');
+        }
+        return back();
+
     }
 
 
