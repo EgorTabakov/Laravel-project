@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryCreate;
 use App\Models\Category;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
@@ -41,11 +42,9 @@ class CategoryController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CategoryCreate $request)
     {
-        $request->validate([
-            'title' => ['required']
-        ]);
+
         $fields = $request->only('title', 'description');
         $categories = Category::create($fields);
 

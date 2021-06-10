@@ -31,11 +31,9 @@ class InfoPagesController extends Controller
     }
 
 
-    public function store(Request $request, Feedback $feedback)
+    public function store(\App\Http\Requests\Feedback $request, Feedback $feedback)
     {
-        $request->validate([
-            'name' => ['required']
-        ]);
+
         $fields = $request->only('name', 'order');
 
         $feedback = $feedback->fill($fields)->save();
@@ -51,11 +49,9 @@ class InfoPagesController extends Controller
         return view('InfoPages.order');
     }
 
-    public function orderStore(Request $request, Order $order)
+    public function orderStore(\App\Http\Requests\Order $request, Order $order)
     {
-        $request->validate([
-            'name' => ['required']
-        ]);
+
         $fields = $request->only('name', 'phone', 'email', 'order');
 
         $order = $order->fill($fields)->save();

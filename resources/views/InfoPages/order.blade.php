@@ -35,7 +35,7 @@
                         <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}">
                     </div>
                     <div class="form-group">
-                        <label for="order">Запрос</label>
+                        <label for="order">Заказ на выгрузку</label>
                         <textarea class="form-control" name="order" id="order">{!! old('order') !!}</textarea>
                     </div>
                     <br>
