@@ -34,7 +34,7 @@ class InfoPagesController extends Controller
     public function store(\App\Http\Requests\Feedback $request, Feedback $feedback)
     {
 
-        $fields = $request->only('name', 'order');
+        $fields = $request->validated();
 
         $feedback = $feedback->fill($fields)->save();
         if ($feedback) {
@@ -52,7 +52,7 @@ class InfoPagesController extends Controller
     public function orderStore(\App\Http\Requests\Order $request, Order $order)
     {
 
-        $fields = $request->only('name', 'phone', 'email', 'order');
+        $fields = $request->validated();
 
         $order = $order->fill($fields)->save();
         if ($order) {

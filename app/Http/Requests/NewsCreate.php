@@ -21,21 +21,25 @@ class NewsCreate extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules():array
     {
         return [
-            'title' => ['required' ,'string', 'min:5', 'max:100']
+            'category_id' => ['required' , 'integer'],
+            'title' => ['required', 'string', 'min:5', 'max:100'],
+            'image' => ['sometimes'],
+            'description' => ['required']
 
         ];
     }
+
     public function messages(): array
     {
         return [
-            'required'=> "Поле :attribute не должно быть пустым"
+            'required' => "Поле :attribute не должно быть пустым"
         ];
     }
 
-    public function attributes():array
+    public function attributes(): array
     {
         return [
             'title' => 'Заголовок'

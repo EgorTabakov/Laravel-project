@@ -31,12 +31,14 @@
                     <td>{{$category->title}}</td>
                     <td>{{$category->description}}</td>
                     <td><a href="{{ route('categories.edit', ['category' => $category]) }}">Ред.</a></td>
-                    <td><form action="{{ route('categories.destroy', ['category' => $category]) }}" method="post">
+                    <td>
+                        <form action="{{ route('categories.destroy', ['category' => $category]) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button type="submit"  class="btn btn-sm btn-danger">Уд</button>
+                            <button type="submit" class="btn btn-sm btn-danger">Уд</button>
 
-                        </form></td>
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <tr>

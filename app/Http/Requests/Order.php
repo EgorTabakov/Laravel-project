@@ -16,6 +16,7 @@ class Order extends FormRequest
         return [
 
             'name' => ['required'],
+            'phone' => ['required'],
             'order' => ['required'],
             'email' => ['email']
 

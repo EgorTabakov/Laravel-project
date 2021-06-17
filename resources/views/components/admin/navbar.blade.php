@@ -21,9 +21,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link @if( request()->routeIs("account.*")) active @endif" href="{{ route('account.index') }}">
                     <span data-feather="users"></span>
-                    Customers
+                    Пользователи
                 </a>
             </li>
             <li class="nav-item">

@@ -45,7 +45,7 @@ class CategoryController extends Controller
     public function store(CategoryCreate $request)
     {
 
-        $fields = $request->only('title', 'description');
+        $fields = $request->validated();
         $categories = Category::create($fields);
 
         if ($categories) {

@@ -34,7 +34,7 @@ class CategoryCreate extends FormRequest
     public function messages(): array
     {
         return [
-            'requared' => ":attribute не должно быть пустым"
+            'required' => ":attribute не должно быть пустым"
         ];
     }
 
