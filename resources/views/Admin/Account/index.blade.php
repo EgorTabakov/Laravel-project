@@ -8,6 +8,7 @@
     </div>
     <div class="table-responsive">
         <table class="table table-bordered">
+            Добро пожаловать: {{ Auth::user()->name }} <br>
             <tr>
                 <th>ID</th>
                 <th>Имя</th>
@@ -28,9 +29,10 @@
 
                     @endif
 
-                    <td><a href="{{ route('account.edit', ['user' => $user]) }}">Ред.</a></td>
+                    <td><a href="{{ route('account.edit', $user->id) }}">Ред.</a></td>
+
                     <td>
-                        <form action="{{ route('account.destroy', ['user' => $user]) }}" >
+                        <form action="{{ route('account.destroy', $user->id) }}" method="post">
                             @method('delete')
                             <button type="submit" class="btn btn-sm btn-danger">Уд</button>
 

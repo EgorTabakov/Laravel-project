@@ -69,6 +69,7 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param News $news
      * @return \Illuminate\Http\Response
      */
     public function edit(News $news)

@@ -7,9 +7,9 @@
         <div>
 
 
-            <form method="post" action="{{ route('account.update', ['user' => $user]) }}">
+            <form method="post" action="{{ route('account.update', $user->id) }}">
                 @csrf
-
+                @method('put')
 
                 @if($errors->has('name'))
                     @foreach($errors->get('name') as $error)
@@ -35,7 +35,7 @@
 
                 <div class="form-group">
                     <label for="isAdmin">Статус</label>
-                    <input type="text" class="form-control" name="isAdmin" id="isAdmin" value="{{ $user->Is_Admin }}">
+                    <input type="text" class="form-control" name="isAdmin" id="isAdmin" value="{{ $user->is_admin }}">
                 </div>
 
                 @if($errors->has('password'))

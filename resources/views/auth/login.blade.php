@@ -53,6 +53,8 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
+                                <a href="{{ route('vk.login') }}">Вход через VK</a>
+                                <a href="{{ route('fb.login') }}">Вход через FB</a><br><br><br><br>
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Логин') }}
                                 </button>

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-use \App\Http\Controllers\Account\IndexController as AccountController;
+use \App\Http\Controllers\Admin\Account\IndexController as AccountController;
 use \App\Http\Controllers\NewsController;
+use \App\Http\Controllers\Admin\ParserController;
+use \App\Http\Controllers\SocialController;
 use \App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use \App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use \App\Http\Controllers\InfoPagesController;
@@ -35,24 +38,26 @@ Route::post('/order', [InfoPagesController::class, 'orderStore']);
 //account
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'account'], function () {
-        Route::get('/', AccountController::class)->name('account');
+        Route::get('/', AccountController::class)->name('login');
         Route::get('/logout', function () {
-            \Auth::logout();
+            Auth::logout();
             return redirect()->route('login');
         })->name('account.logout');
 
-        Route::get('/edit', [AccountController::class, 'edit'])->name('account.edit');
-        Route::post('/update', [AccountController::class, 'update'])->name('account.update');
-        Route::get('/index', [AccountController::class, 'index'])->name('account.index');
-        Route::get('/destroy', [AccountController::class, 'destroy'])->name('account.destroy');
+    });
     });
 //admin
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         Route::resource('/categories', AdminCategoryController::class);
         Route::resource('/news', AdminNewsController::class);
-
+        Route::get('/parser', [ParserController::class, 'index']);
+        Route::resource('/account', AccountController::class);
+        Route::get('/logout', function () {
+            Auth::logout();
+            return redirect()->route('login');
+        })->name('admin.logout');
     });
-});
+
 
 //news
 Route::get('/news', [NewsController::class, 'index']);
@@ -70,3 +75,17 @@ Route::get('/news/categories-{id}', [NewsController::class, 'categoriesShow'])
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/login/vk', [SocialController::class, 'login'])
+        ->name('vk.login');
+    Route::get('/callback/vk', [SocialController::class, 'callback'])
+        ->name('vk.callback');
+    Route::get('/login/facebook/', [SocialController::class, 'loginFB'])
+        ->name('fb.login');
+    Route::get('/login/callback/facebook', [SocialController::class, 'callbackFB'])
+        ->name('fb.callback');
+    Route::get('privacy_policy', [SocialController::class, 'privacy_policy'])
+        ->name('callback');
+    Route::get('/terms', [SocialController::class, 'terms'])
+        ->name('terms');
+});
