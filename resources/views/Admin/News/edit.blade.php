@@ -12,7 +12,7 @@
                 @endforeach
             @endif
 
-            <form method="post" action="{{ route('news.update', ['news' =>$news]) }}">
+            <form method="post" action="{{ route('news.update', ['news' =>$news]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="form-group">
@@ -20,7 +20,7 @@
                     <select class="form-control" name="category_id" id="category_id">
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}"
-                            @if($category->id === $news->category_id) selected @endif>{{ $category->title }}</option>
+                                    @if($category->id === $news->category_id) selected @endif>{{ $category->title }}</option>
                         @endforeach
                     </select>
 
@@ -35,7 +35,8 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Заголовок</label>
-                    <textarea class="form-control" name="description" id="description">{!! $news->description !!}</textarea>
+                    <textarea class="form-control" name="description"
+                              id="description">{!! $news->description !!}</textarea>
                 </div>
                 <br>
                 <button class="btn btn-success" type="submit">Редактировать новость</button>
@@ -49,3 +50,21 @@
 
 
 @endsection
+@push('js')
+
+    <script src="{{ asset('/js/ckeditor5-build-classic/ckeditor.js') }}"
+            type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript">
+        ClassicEditor
+            .create(document.querySelector('#description'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
+
+@endpush

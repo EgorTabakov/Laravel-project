@@ -15,6 +15,9 @@
         </div>
     </div>
     <div class="table-responsive">
+        @if(session()->has('success'))
+            <div class="alert alert-success">{{ session()->get('success') }}</div>
+        @endif
         <table class="table table-bordered">
             <tr>
                 <th>ID</th>
@@ -33,12 +36,14 @@
                     <td>{{$news->description}}</td>
                     <td>{{$news->created_at->format('d-m-Y H:i')}}</td>
                     <td><a href="{{ route('news.edit', ['news' => $news]) }}">Ред.</a></td>
-                    <td><form action="{{ route('news.destroy', ['news' => $news]) }}" method="post">
-                    @csrf
-                        @method('delete')
-                            <button type="submit"  class="btn btn-sm btn-danger">Уд</button>
+                    <td>
+                        <form action="{{ route('news.destroy', ['news' => $news]) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-sm btn-danger">Уд</button>
 
-                        </form></td>
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <tr>
